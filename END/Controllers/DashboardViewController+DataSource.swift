@@ -21,7 +21,8 @@ extension DashboardViewController: UICollectionViewDataSource {
         firstHeader,
         horizontalCollectionView,
         secondHeader,
-        fullWidthItems,
+        firstFullWidthItem,
+        secondFullWidthItem,
         halfWidthItems
         
         static var count: Int { return Sections.halfWidthItems.rawValue + 1}
@@ -74,7 +75,8 @@ extension DashboardViewController: UICollectionViewDataSource {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomHeaderCell.cellIdentifier(), for: indexPath) as? CustomHeaderCell
             (cell as? CustomHeaderCell)?.setup(leftText: "Brands", rightText: "Brands A-Z")
             
-        case .fullWidthItems:
+        case .firstFullWidthItem,
+             .secondFullWidthItem:
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: FullWidthInventoryItem.cellIdentifier(), for: indexPath) as? FullWidthInventoryItem
             (cell as? FullWidthInventoryItem)?.setup()
         
@@ -98,13 +100,14 @@ extension DashboardViewController: UICollectionViewDelegateFlowLayout {
             return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height/2)
         case .horizontalCollectionView:
             return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height*0.75)
-        case .fullWidthItems:
-            return CGSize(width: collectionView.frame.size.width, height: 200)
+        case .firstFullWidthItem,
+             .secondFullWidthItem:
+            return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height*0.25)
         case .halfWidthItems:
-            return CGSize(width: collectionView.frame.size.width/2, height: 200)
+            return CGSize(width: collectionView.frame.size.width/2 - 2*horizontalEdgeInset, height: collectionView.frame.size.height*0.25)
         case .firstHeader,
              .secondHeader:
-            return CGSize(width: collectionView.frame.size.width, height: 20)
+            return CGSize(width: collectionView.frame.size.width, height: 60)
         }
         
     }

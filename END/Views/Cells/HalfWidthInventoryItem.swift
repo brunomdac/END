@@ -10,6 +10,25 @@ import UIKit
 
 class HalfWidthInventoryItem: UICollectionViewCell, CustomCollectionViewCellProtocol {
     
+    //MARK: Mocked data
+    let mockedHalfWidthItemTitles = [
+        "Vitra",
+        "Kappa kontroll",
+        "Wood wood",
+        "Engineered garments"
+    ]
+    
+    let mockedHalfWidthItemDescriptions = [
+        "Shop now",
+        "Online now"
+    ]
+    
+    let mockedImageNames: [String] = [
+        "halfWidthItem1",
+        "halfWidthItem2",
+        "halfWidthItem3",
+        "halfWidthItem4"
+    ]
     
     private lazy var imageView = UIImageView()
     private lazy var titleLabel = UILabel()
@@ -21,8 +40,10 @@ class HalfWidthInventoryItem: UICollectionViewCell, CustomCollectionViewCellProt
         self.addSubview(titleLabel)
         self.addSubview(descriptionLabel)
         
-        backgroundColor = UIColor.yellow.withAlphaComponent(0.3)
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = UIImage(named: mockedImageNames[Int(arc4random_uniform(4))])
+        
+        clipsToBounds = true
         titleLabel.textAlignment = .center
         descriptionLabel.textAlignment = .center
         
@@ -35,7 +56,8 @@ class HalfWidthInventoryItem: UICollectionViewCell, CustomCollectionViewCellProt
         titleLabel.font = UIFont.boldSystemFont(ofSize: 24)
         descriptionLabel.font = descriptionLabel.font.withSize(20)
         
-        
+        titleLabel.text = mockedHalfWidthItemTitles[Int(arc4random_uniform(4))].uppercased()
+        descriptionLabel.text = mockedHalfWidthItemDescriptions[Int(arc4random_uniform(2))].uppercased()
     }
     
     func setupConstraints() {
@@ -44,11 +66,13 @@ class HalfWidthInventoryItem: UICollectionViewCell, CustomCollectionViewCellProt
         }
         
         titleLabel.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview().offset(-16)
         }
         
         descriptionLabel.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview().offset(16)
         }

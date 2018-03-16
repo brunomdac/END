@@ -21,7 +21,8 @@ class DashboardViewController: UIViewController {
     private let ratioHorizontalScrollViewToScreenHeight = 0.7
     private let ratioVerticalScrollViewToScreenHeight = 2
     
-    
+    let horizontalEdgeInset: CGFloat = 4
+    let verticalEdgeInsetValue: CGFloat = 4
     
     //MARK: Properties
     
@@ -40,11 +41,11 @@ class DashboardViewController: UIViewController {
         view.backgroundColor = UIColor.white
         
         let collectionViewLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        collectionViewLayout.sectionInset = UIEdgeInsets.zero
+        collectionViewLayout.sectionInset = UIEdgeInsets(top: verticalEdgeInsetValue, left: horizontalEdgeInset, bottom: verticalEdgeInsetValue, right: horizontalEdgeInset)
         collectionViewLayout.itemSize = CGSize.zero
         collectionViewLayout.scrollDirection = .vertical
         collectionViewLayout.minimumInteritemSpacing = 0
-        collectionViewLayout.minimumLineSpacing = 0
+        collectionViewLayout.minimumLineSpacing = 8
         
         collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: collectionViewLayout)
         collectionView.dataSource = self
