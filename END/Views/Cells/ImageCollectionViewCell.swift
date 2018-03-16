@@ -11,7 +11,7 @@ import UIKit
 class ImageCollectionViewCell: UICollectionViewCell, CustomCollectionViewCellProtocol {
     
     //MARK: Constraints
-    let labelsVerticalOffset = 8
+    let labelsVerticalOffset = 24
     
     //MARK: Properties
     private lazy var imageView = UIImageView()
@@ -24,10 +24,17 @@ class ImageCollectionViewCell: UICollectionViewCell, CustomCollectionViewCellPro
         self.addSubview(titleLabel)
         self.addSubview(descriptionLabel)
         
-        imageView.backgroundColor = UIColor.orange.withAlphaComponent(0.3)
-        titleLabel.text = "Needles".capitalized
+        imageView.image = UIImage(named: "cover_photo")
+        imageView.contentMode = .scaleAspectFill
+        titleLabel.text = "Needles".uppercased()
         descriptionLabel.text = "That '70s Show."
         descriptionLabel.numberOfLines = 0
+        
+        titleLabel.textColor = UIColor.white
+        descriptionLabel.textColor = UIColor.white
+        
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 40)
+        descriptionLabel.font = titleLabel.font.withSize(16)
         
     }
     

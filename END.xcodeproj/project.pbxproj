@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		154418A7205B237000B28875 /* CustomReusableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154418A6205B237000B28875 /* CustomReusableHeader.swift */; };
 		154418A9205B3A7400B28875 /* MockedValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154418A8205B3A7400B28875 /* MockedValues.swift */; };
+		154418AB205B504000B28875 /* FullWidthInventoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154418AA205B504000B28875 /* FullWidthInventoryItem.swift */; };
+		154418AD205B505200B28875 /* HalfWidthInventoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154418AC205B505200B28875 /* HalfWidthInventoryItem.swift */; };
 		159972592059C25C0096C180 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159972582059C25C0096C180 /* AppDelegate.swift */; };
 		1599725E2059C25C0096C180 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1599725C2059C25C0096C180 /* Main.storyboard */; };
 		159972602059C25C0096C180 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1599725F2059C25C0096C180 /* Assets.xcassets */; };
@@ -40,6 +42,8 @@
 		125ABB821C18423F0338E301 /* Pods_END.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_END.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		154418A6205B237000B28875 /* CustomReusableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomReusableHeader.swift; sourceTree = "<group>"; };
 		154418A8205B3A7400B28875 /* MockedValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedValues.swift; sourceTree = "<group>"; };
+		154418AA205B504000B28875 /* FullWidthInventoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullWidthInventoryItem.swift; sourceTree = "<group>"; };
+		154418AC205B505200B28875 /* HalfWidthInventoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfWidthInventoryItem.swift; sourceTree = "<group>"; };
 		159972552059C25C0096C180 /* END.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = END.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		159972582059C25C0096C180 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1599725D2059C25C0096C180 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -160,6 +164,8 @@
 				1599728D2059F93C0096C180 /* HorizontalCollectionViewCell.swift */,
 				1599728F205A00250096C180 /* InventoryItemCell.swift */,
 				154418A6205B237000B28875 /* CustomReusableHeader.swift */,
+				154418AA205B504000B28875 /* FullWidthInventoryItem.swift */,
+				154418AC205B505200B28875 /* HalfWidthInventoryItem.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -369,9 +375,11 @@
 				1599727E2059C9FD0096C180 /* MainNavigationController.swift in Sources */,
 				1599728C2059F05C0096C180 /* CustomCollectionViewCellProtocol.swift in Sources */,
 				154418A9205B3A7400B28875 /* MockedValues.swift in Sources */,
+				154418AD205B505200B28875 /* HalfWidthInventoryItem.swift in Sources */,
 				154418A7205B237000B28875 /* CustomReusableHeader.swift in Sources */,
 				159972592059C25C0096C180 /* AppDelegate.swift in Sources */,
 				159972802059CDF90096C180 /* DashboardViewController.swift in Sources */,
+				154418AB205B504000B28875 /* FullWidthInventoryItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

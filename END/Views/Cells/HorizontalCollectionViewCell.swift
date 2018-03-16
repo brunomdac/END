@@ -33,6 +33,8 @@ class HorizontalCollectionViewCell: UICollectionViewCell, CustomCollectionViewCe
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.backgroundColor = UIColor.white
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.showsVerticalScrollIndicator = false
         
         collectionView.register(InventoryItemCell.self, forCellWithReuseIdentifier: InventoryItemCell.cellIdentifier())
         

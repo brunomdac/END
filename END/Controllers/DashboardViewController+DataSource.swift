@@ -21,9 +21,10 @@ extension DashboardViewController: UICollectionViewDataSource {
         firstHeader,
         horizontalCollectionView,
         secondHeader,
-        listOfItems
+        fullWidthItems,
+        halfWidthItems
         
-        static var count: Int { return Sections.listOfItems.rawValue + 1}
+        static var count: Int { return Sections.halfWidthItems.rawValue + 1}
     }
     
     enum BigImageSectionCells: Int {
@@ -50,31 +51,37 @@ extension DashboardViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Sections(rawValue: section) == .listOfItems ? /*40*/0 : 1
+        return Sections(rawValue: section) == .halfWidthItems ? 12 : 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cell: UICollectionViewCell!
         
-        switch Sections(rawValue: indexPath.section) ?? .listOfItems {
+        switch Sections(rawValue: indexPath.section) ?? .halfWidthItems {
         case .bigImage:
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCollectionViewCell.cellIdentifier(), for: indexPath) as? ImageCollectionViewCell
-            (cell as! ImageCollectionViewCell).setup()
+            (cell as? ImageCollectionViewCell)?.setup()
             
         case .firstHeader:
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomHeaderCell.cellIdentifier(), for: indexPath) as? CustomHeaderCell
-            (cell as! CustomHeaderCell).setup(leftText: "Latest", rightText: "View All")
+            (cell as? CustomHeaderCell)?.setup(leftText: "Latest", rightText: "View All")
             
         case .horizontalCollectionView:
             cell =  collectionView.dequeueReusableCell(withReuseIdentifier: HorizontalCollectionViewCell.cellIdentifier(), for: indexPath) as? HorizontalCollectionViewCell
-            (cell as! HorizontalCollectionViewCell).setup()
+            (cell as? HorizontalCollectionViewCell)?.setup()
             
         case .secondHeader:
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomHeaderCell.cellIdentifier(), for: indexPath) as? CustomHeaderCell
-            (cell as! CustomHeaderCell).setup(leftText: "Brands", rightText: "Brands A-Z")
+            (cell as? CustomHeaderCell)?.setup(leftText: "Brands", rightText: "Brands A-Z")
             
-        case .listOfItems:
-            cell = UICollectionViewCell()
+        case .fullWidthItems:
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: FullWidthInventoryItem.cellIdentifier(), for: indexPath) as? FullWidthInventoryItem
+            (cell as? FullWidthInventoryItem)?.setup()
+        
+        case .halfWidthItems:
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: HalfWidthInventoryItem.cellIdentifier(), for: indexPath) as? HalfWidthInventoryItem
+            (cell as? HalfWidthInventoryItem)?.setup()
+            
         }
         
         return cell
@@ -86,13 +93,15 @@ extension DashboardViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        switch Sections(rawValue: indexPath.section) ?? .listOfItems {
+        switch Sections(rawValue: indexPath.section) ?? .halfWidthItems {
         case .bigImage:
             return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height/2)
         case .horizontalCollectionView:
             return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height*0.75)
-        case .listOfItems:
-            return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height*2)
+        case .fullWidthItems:
+            return CGSize(width: collectionView.frame.size.width, height: 200)
+        case .halfWidthItems:
+            return CGSize(width: collectionView.frame.size.width/2, height: 200)
         case .firstHeader,
              .secondHeader:
             return CGSize(width: collectionView.frame.size.width, height: 20)

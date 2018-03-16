@@ -16,8 +16,8 @@ class CustomHeaderCell: UICollectionViewCell {
     func setup(leftText: String, rightText: String) {
         setupViews()
         
-        leftLabel.text = leftText.capitalized
-        rightLabel.text = rightText.capitalized
+        leftLabel.text = leftText.uppercased()
+        rightLabel.text = rightText.uppercased()
         
         setupConstraints()
     }

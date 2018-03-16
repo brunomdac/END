@@ -43,14 +43,20 @@ class DashboardViewController: UIViewController {
         collectionViewLayout.sectionInset = UIEdgeInsets.zero
         collectionViewLayout.itemSize = CGSize.zero
         collectionViewLayout.scrollDirection = .vertical
+        collectionViewLayout.minimumInteritemSpacing = 0
+        collectionViewLayout.minimumLineSpacing = 0
         
         collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: collectionViewLayout)
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.showsVerticalScrollIndicator = false
         
         collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: ImageCollectionViewCell.cellIdentifier())
         collectionView.register(HorizontalCollectionViewCell.self, forCellWithReuseIdentifier: HorizontalCollectionViewCell.cellIdentifier())
         collectionView.register(CustomHeaderCell.self, forCellWithReuseIdentifier: CustomHeaderCell.cellIdentifier())
+        collectionView.register(FullWidthInventoryItem.self, forCellWithReuseIdentifier: FullWidthInventoryItem.cellIdentifier())
+        collectionView.register(HalfWidthInventoryItem.self, forCellWithReuseIdentifier: HalfWidthInventoryItem.cellIdentifier())
         
         collectionView.backgroundColor = UIColor.white
         view.addSubview(collectionView)
