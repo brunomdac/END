@@ -21,10 +21,10 @@ class HorizontalCollectionViewCell: UICollectionViewCell, CustomCollectionViewCe
         
         let collectionViewLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         collectionViewLayout.sectionInset = UIEdgeInsets.zero
-        collectionViewLayout.itemSize = CGSize.zero
         collectionViewLayout.scrollDirection = .horizontal
         collectionViewLayout.minimumInteritemSpacing = 0
         collectionViewLayout.minimumLineSpacing = 0
+        collectionViewLayout.minimumInteritemSpacing = 0
         
         collectionView = UICollectionView(frame: contentView.frame, collectionViewLayout: collectionViewLayout)
         
@@ -58,12 +58,12 @@ extension HorizontalCollectionViewCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return 200
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: InventoryItemCell.cellIdentifier(), for: indexPath) as? InventoryItemCell
-        cell?.setup()
+        cell?.setup(itemIndex: indexPath.item)
         return cell ?? UICollectionViewCell()
     }
     
@@ -77,5 +77,7 @@ extension HorizontalCollectionViewCell: UICollectionViewDelegateFlowLayout {
 }
 
 extension HorizontalCollectionViewCell: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("TODO push new view controller to top of navigation stack")
+    }
 }

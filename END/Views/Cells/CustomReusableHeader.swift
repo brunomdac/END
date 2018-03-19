@@ -10,6 +10,7 @@ import UIKit
 
 class CustomHeaderCell: UICollectionViewCell {
     
+    let horizontalOffset: CGFloat = 8
     private lazy var leftLabel = UILabel()
     private lazy var rightLabel = UILabel()
     
@@ -17,7 +18,12 @@ class CustomHeaderCell: UICollectionViewCell {
         setupViews()
         
         leftLabel.text = leftText.uppercased()
-        rightLabel.text = rightText.uppercased()
+        
+        leftLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        
+        let underlineAttribute = [NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle.rawValue]
+        let underlineAttributedString = NSAttributedString(string: rightText.uppercased(), attributes: underlineAttribute)
+        rightLabel.attributedText = underlineAttributedString
         
         setupConstraints()
     }
@@ -33,12 +39,14 @@ class CustomHeaderCell: UICollectionViewCell {
     
     func setupConstraints() {
         leftLabel.snp.makeConstraints { make in
-            make.leading.centerY.height.equalToSuperview()
-            make.trailing.lessThanOrEqualTo(rightLabel.snp.leading).offset(8)
+            make.centerY.height.equalToSuperview()
+            make.leading.equalToSuperview().offset(horizontalOffset)
+            make.trailing.lessThanOrEqualTo(rightLabel.snp.leading).offset(horizontalOffset)
         }
         
         rightLabel.snp.makeConstraints { make in
-            make.trailing.centerY.height.equalToSuperview()
+            make.centerY.height.equalToSuperview()
+            make.trailing.equalToSuperview().offset(-horizontalOffset)
         }
     }
     

@@ -41,8 +41,6 @@ class DashboardViewController: UIViewController {
         view.backgroundColor = UIColor.white
         
         let collectionViewLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        collectionViewLayout.sectionInset = UIEdgeInsets(top: verticalEdgeInsetValue, left: horizontalEdgeInset, bottom: verticalEdgeInsetValue, right: horizontalEdgeInset)
-        collectionViewLayout.itemSize = CGSize.zero
         collectionViewLayout.scrollDirection = .vertical
         collectionViewLayout.minimumInteritemSpacing = 0
         collectionViewLayout.minimumLineSpacing = 8

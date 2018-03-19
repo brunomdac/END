@@ -20,24 +20,52 @@ class InventoryItemCell: UICollectionViewCell, CustomCollectionViewCellProtocol 
     private lazy var descriptionLabel = UILabel()
     private lazy var priceTag = UILabel()
     
-    func setup() {
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        imageView.image = nil
+        backgroundColor = UIColor.gray.withAlphaComponent(0.2)
+        nameLabel.text = ""
+        descriptionLabel.text = ""
+        priceTag.text = ""
+    }
+    
+    func setup(itemIndex: Int) {
         setupViews()
         setupConstraints()
         
-        nameLabel.text = mockedItemNames[Int(arc4random_uniform(numberOfMockedItems))]
-        descriptionLabel.text = mockedItemColors[Int(arc4random_uniform(numberOfMockedItems))]
-        priceTag.text = mockedPriceTags[Int(arc4random_uniform(numberOfMockedItems))]
-        imageView.image = UIImage(named: mockedImages[Int(arc4random_uniform(numberOfMockedItems))])
+        nameLabel.text = mockedItemNames[itemIndex % mockedItemNames.count]
+        descriptionLabel.text = mockedItemColors[itemIndex % mockedItemColors.count]
+        priceTag.text = mockedPriceTags[itemIndex % mockedPriceTags.count]
+        imageView.image = UIImage(named: mockedImages[itemIndex % mockedImages.count])
+        
+        nameLabel.font = nameLabel.font.withSize(13)
+        descriptionLabel.font = nameLabel.font.withSize(13)
+        priceTag.font = nameLabel.font.withSize(13)
+        
+        descriptionLabel.textColor = .gray
+
     }
     
     func setupViews() {
         
         backgroundColor = UIColor.white
         
-        self.addSubview(imageView)
-        self.addSubview(nameLabel)
-        self.addSubview(descriptionLabel)
-        self.addSubview(priceTag)
+        if !subviews.contains(imageView) {
+            self.addSubview(imageView)
+        }
+        
+        if !subviews.contains(nameLabel) {
+            self.addSubview(nameLabel)
+        }
+        
+        if !subviews.contains(descriptionLabel) {
+            self.addSubview(descriptionLabel)
+        }
+        
+        if !subviews.contains(priceTag) {
+            self.addSubview(priceTag)
+        }
         
         imageView.contentMode = .scaleAspectFit
         nameLabel.textAlignment = .center
@@ -55,18 +83,19 @@ class InventoryItemCell: UICollectionViewCell, CustomCollectionViewCellProtocol 
         
         nameLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(imageView.snp.bottom).offset(cellElementsVerticalOffset)
+            make.top.equalTo(imageView.snp.bottom)
         }
         
         descriptionLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(nameLabel.snp.bottom).offset(cellElementsVerticalOffset)
-            make.height.equalToSuperview().multipliedBy(0.1)
+            make.top.equalTo(nameLabel.snp.bottom)
+            make.height.lessThanOrEqualToSuperview().multipliedBy(0.1)
         }
         
         priceTag.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.1)
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(descriptionLabel.snp.bottom)
+            make.bottom.lessThanOrEqualToSuperview()
         }
     }
     

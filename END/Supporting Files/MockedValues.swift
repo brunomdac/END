@@ -53,3 +53,46 @@ let mockedImages = [
     "IMG_2653.jpg",
     "IMG_2654.jpg"
 ]
+
+let mockedFullWidthItemTitles = [
+    "Engineered Garments",
+    "Valentino"
+]
+
+let mockedFullWidthItemDescriptions = [
+    "Island meets industry.",
+    "The age of VLTN."
+]
+
+let mockedImageNames: [String] = [
+    "mockedImage10",
+    "mockedImage11",
+    "mockedImage12",
+    "mockedImage13"
+]
+
+let mockedHalfWidthItemTitles = [
+    "Vitra",
+    "Kappa kontroll",
+    "Wood wood",
+    "Engineered garments"
+]
+
+let mockedHalfWidthItemDescriptions = [
+    "Shop now",
+    "Online now"
+]
+
+let mockedHalfWidthImageNames: [String] = [
+    "halfWidthItem1",
+    "halfWidthItem2",
+    "halfWidthItem3",
+    "halfWidthItem4",
+    "halfWidthItem5",
+    "halfWidthItem6",
+    "halfWidthItem7",
+    "halfWidthItem8",
+    "halfWidthItem9",
+    "halfWidthItem10"
+]
+

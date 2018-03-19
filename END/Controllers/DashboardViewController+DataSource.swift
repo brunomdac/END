@@ -52,7 +52,7 @@ extension DashboardViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Sections(rawValue: section) == .halfWidthItems ? 12 : 1
+        return Sections(rawValue: section) == .halfWidthItems ? 360 : 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -78,12 +78,11 @@ extension DashboardViewController: UICollectionViewDataSource {
         case .firstFullWidthItem,
              .secondFullWidthItem:
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: FullWidthInventoryItem.cellIdentifier(), for: indexPath) as? FullWidthInventoryItem
-            (cell as? FullWidthInventoryItem)?.setup()
+            (cell as? FullWidthInventoryItem)?.setup(sectionIndex: indexPath.section)
         
         case .halfWidthItems:
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: HalfWidthInventoryItem.cellIdentifier(), for: indexPath) as? HalfWidthInventoryItem
-            (cell as? HalfWidthInventoryItem)?.setup()
-            
+            (cell as? HalfWidthInventoryItem)?.setup(blankCell: indexPath.item % 4 == 1 || indexPath.item % 4 == 2, itemIndex: indexPath.item*6%11) // Just to be able to predict deterministically the random number
         }
         
         return cell
@@ -99,7 +98,7 @@ extension DashboardViewController: UICollectionViewDelegateFlowLayout {
         case .bigImage:
             return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height/2)
         case .horizontalCollectionView:
-            return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height*0.75)
+            return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height*0.6)
         case .firstFullWidthItem,
              .secondFullWidthItem:
             return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height*0.25)
@@ -107,8 +106,18 @@ extension DashboardViewController: UICollectionViewDelegateFlowLayout {
             return CGSize(width: collectionView.frame.size.width/2 - 2*horizontalEdgeInset, height: collectionView.frame.size.height*0.25)
         case .firstHeader,
              .secondHeader:
-            return CGSize(width: collectionView.frame.size.width, height: 60)
+            return CGSize(width: collectionView.frame.size.width, height: 32)
         }
         
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    
+        switch Sections(rawValue: section) ?? .halfWidthItems {
+        case .bigImage:
+            return UIEdgeInsets.zero
+        default:
+            return UIEdgeInsets(top: verticalEdgeInsetValue, left: horizontalEdgeInset, bottom: verticalEdgeInsetValue, right: horizontalEdgeInset)
+        }
     }
 }

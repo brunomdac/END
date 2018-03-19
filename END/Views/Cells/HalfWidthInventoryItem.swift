@@ -8,79 +8,64 @@
 
 import UIKit
 
-class HalfWidthInventoryItem: UICollectionViewCell, CustomCollectionViewCellProtocol {
+class HalfWidthInventoryItem: UICollectionViewCell {
     
-    //MARK: Mocked data
-    let mockedHalfWidthItemTitles = [
-        "Vitra",
-        "Kappa kontroll",
-        "Wood wood",
-        "Engineered garments"
-    ]
+    lazy var imageView = UIImageView()
+    lazy var titleLabel = UILabel()
+    lazy var descriptionLabel = UILabel()
     
-    let mockedHalfWidthItemDescriptions = [
-        "Shop now",
-        "Online now"
-    ]
-    
-    let mockedImageNames: [String] = [
-        "halfWidthItem1",
-        "halfWidthItem2",
-        "halfWidthItem3",
-        "halfWidthItem4"
-    ]
-    
-    private lazy var imageView = UIImageView()
-    private lazy var titleLabel = UILabel()
-    private lazy var descriptionLabel = UILabel()
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = nil
+        backgroundColor = UIColor.gray.withAlphaComponent(0.2)
+        titleLabel.text = ""
+        descriptionLabel.text = ""
+    }
     
     
-    func setupViews() {
-        self.addSubview(imageView)
-        self.addSubview(titleLabel)
-        self.addSubview(descriptionLabel)
+    func setup(blankCell: Bool, itemIndex: Int) {
         
-        imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(named: mockedImageNames[Int(arc4random_uniform(4))])
+        if blankCell {
+            backgroundColor = UIColor.white
+            titleLabel.textColor = UIColor.black
+            descriptionLabel.textColor = UIColor.black
+            titleLabel.textAlignment = .center
+            descriptionLabel.textAlignment = .center
+            titleLabel.numberOfLines = 0
+            descriptionLabel.numberOfLines = 0
+            titleLabel.font = UIFont.boldSystemFont(ofSize: 24)
+            descriptionLabel.font = descriptionLabel.font.withSize(20)
+            titleLabel.text = mockedHalfWidthItemTitles[itemIndex%mockedHalfWidthItemTitles.count].uppercased()
+            descriptionLabel.text = mockedHalfWidthItemDescriptions[itemIndex%mockedHalfWidthItemDescriptions.count].uppercased()
+            self.addSubview(titleLabel)
+            self.addSubview(descriptionLabel)
+            
+            titleLabel.snp.makeConstraints { make in
+                make.left.right.equalToSuperview()
+                make.centerX.equalToSuperview()
+                make.centerY.equalToSuperview().offset(-16)
+            }
+            
+            descriptionLabel.snp.makeConstraints { make in
+                make.left.right.equalToSuperview()
+                make.centerX.equalToSuperview()
+                make.centerY.equalToSuperview().offset(16).priority(600)
+                make.top.greaterThanOrEqualTo(titleLabel.snp.bottom).offset(8).priority(999)
+            }
+            
+        } else {
+            imageView.image = UIImage(named: mockedHalfWidthImageNames[itemIndex%mockedHalfWidthImageNames.count])
+            imageView.contentMode = .scaleAspectFill
+            titleLabel.textColor = UIColor.white
+            descriptionLabel.textColor = UIColor.white
+            self.addSubview(imageView)
+            
+            imageView.snp.makeConstraints { make in
+                make.leading.trailing.top.bottom.equalToSuperview()
+            }
+        }
         
         clipsToBounds = true
-        titleLabel.textAlignment = .center
-        descriptionLabel.textAlignment = .center
-        
-        titleLabel.numberOfLines = 0
-        descriptionLabel.numberOfLines = 0
-        
-        titleLabel.textColor = UIColor.white
-        descriptionLabel.textColor = UIColor.white
-        
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 24)
-        descriptionLabel.font = descriptionLabel.font.withSize(20)
-        
-        titleLabel.text = mockedHalfWidthItemTitles[Int(arc4random_uniform(4))].uppercased()
-        descriptionLabel.text = mockedHalfWidthItemDescriptions[Int(arc4random_uniform(2))].uppercased()
-    }
-    
-    func setupConstraints() {
-        imageView.snp.makeConstraints { make in
-            make.leading.trailing.top.bottom.equalToSuperview()
-        }
-        
-        titleLabel.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
-            make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview().offset(-16)
-        }
-        
-        descriptionLabel.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
-            make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview().offset(16)
-        }
-    }
-    
-    func setup() {
-        setupViews()
-        setupConstraints()
     }
     
 }

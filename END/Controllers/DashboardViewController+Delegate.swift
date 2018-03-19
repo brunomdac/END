@@ -9,5 +9,7 @@
 import UIKit
 
 extension DashboardViewController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("TODO push new view controller to top of navigation stack")
+    }
 }

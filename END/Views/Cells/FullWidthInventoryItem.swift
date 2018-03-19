@@ -8,36 +8,30 @@
 
 import UIKit
 
-class FullWidthInventoryItem: UICollectionViewCell, CustomCollectionViewCellProtocol {
+class FullWidthInventoryItem: UICollectionViewCell {
     
-    //MARK: Mocked data
+    lazy var imageView = UIImageView()
+    lazy var titleLabel = UILabel()
+    lazy var descriptionLabel = UILabel()
     
-    let mockedFullWidthItemTitles = [
-        "Engineered Garments",
-        "Valentino"
-    ]
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = nil
+        backgroundColor = UIColor.gray.withAlphaComponent(0.2)
+        titleLabel.text = ""
+        descriptionLabel.text = ""
+    }
     
-    let mockedFullWidthItemDescriptions = [
-        "Island meets industry.",
-        "The age of VLTN."
-    ]
-    
-    let mockedImageNames: [String] = [
-        "mockedImage10",
-        "mockedImage11",
-        "mockedImage12",
-        "mockedImage13"
-    ]
-    
-    private lazy var imageView = UIImageView()
-    private lazy var titleLabel = UILabel()
-    private lazy var descriptionLabel = UILabel()
-    
-    
-    func setupViews() {
-        self.addSubview(imageView)
-        self.addSubview(titleLabel)
-        self.addSubview(descriptionLabel)
+    func setup(sectionIndex: Int) {
+        if !self.subviews.contains(imageView) {
+            self.addSubview(imageView)
+        }
+        if !self.subviews.contains(titleLabel) {
+            self.addSubview(titleLabel)
+        }
+        if !self.subviews.contains(descriptionLabel) {
+            self.addSubview(descriptionLabel)
+        }
         
         imageView.contentMode = .scaleAspectFill
         clipsToBounds = true
@@ -53,13 +47,10 @@ class FullWidthInventoryItem: UICollectionViewCell, CustomCollectionViewCellProt
         titleLabel.font = UIFont.boldSystemFont(ofSize: 24)
         descriptionLabel.font = descriptionLabel.font.withSize(20)
         
-        titleLabel.text = mockedFullWidthItemTitles[Int(arc4random_uniform(2))].uppercased()
-        descriptionLabel.text = mockedFullWidthItemDescriptions[Int(arc4random_uniform(2))].uppercased()
+        titleLabel.text = mockedFullWidthItemTitles[sectionIndex%mockedFullWidthItemTitles.count].uppercased()
+        descriptionLabel.text = mockedFullWidthItemDescriptions[sectionIndex%mockedFullWidthItemDescriptions.count].uppercased()
+        imageView.image = UIImage(named: mockedImageNames[sectionIndex%mockedImageNames.count])
         
-        imageView.image = UIImage(named: mockedImageNames[Int(arc4random_uniform(4))])
-    }
-    
-    func setupConstraints() {
         imageView.snp.makeConstraints { make in
             make.leading.trailing.top.bottom.equalToSuperview()
         }
@@ -75,11 +66,6 @@ class FullWidthInventoryItem: UICollectionViewCell, CustomCollectionViewCellProt
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview().offset(16)
         }
-    }
-    
-    func setup() {
-        setupViews()
-        setupConstraints()
     }
     
 }
