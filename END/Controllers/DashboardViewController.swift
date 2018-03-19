@@ -34,7 +34,6 @@ class DashboardViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         setupViews()
-        setupConstraints()
     }
     
     func setupViews() {
@@ -60,9 +59,6 @@ class DashboardViewController: UIViewController {
         collectionView.backgroundColor = UIColor.white
         view.addSubview(collectionView)
         
-    }
-    
-    func setupConstraints() {
     }
     
 }

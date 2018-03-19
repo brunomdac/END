@@ -52,7 +52,7 @@ extension DashboardViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Sections(rawValue: section) == .halfWidthItems ? 360 : 1
+        return Sections(rawValue: section) == .halfWidthItems ? largeNumber : 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

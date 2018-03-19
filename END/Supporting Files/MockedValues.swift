@@ -9,6 +9,7 @@
 import Foundation
 
 let numberOfMockedItems: UInt32 = 8
+let largeNumber = 20000 // Using Int.max would bring us issues
 
 let mockedItemNames = [
     "A.P.C. San Francisco Pullover Hoody",
